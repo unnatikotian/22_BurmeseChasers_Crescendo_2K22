@@ -12,7 +12,7 @@ if ($_SESSION['RollNo']) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LMS</title>
+        <title>Welcome!</title>
         <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -25,7 +25,7 @@ if ($_SESSION['RollNo']) {
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.php">LMS </a>
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.php">Welcome! </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                         <ul class="nav pull-right">
                             <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -53,14 +53,17 @@ if ($_SESSION['RollNo']) {
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home
+                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Dashboard
                                 </a></li>
                                  <li><a href="message.php"><i class="menu-icon icon-inbox"></i>Messages</a>
                                 </li>
-                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Books </a></li>
-                                <li><a href="history.php"><i class="menu-icon icon-tasks"></i>Previously Borrowed Books </a></li>
-                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Recommend Books </a></li>
-                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Books </a></li>
+                                <!-- <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
+                                </li> -->
+                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
+                                <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>
+                                <li><a href="requests.php"><i class="menu-icon icon-tasks"></i>Issue/Return Requests </a></li>
+                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Research Papers Recommendations </a></li>
+                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Research Papers </a></li>
                             </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -69,27 +72,25 @@ if ($_SESSION['RollNo']) {
                         <!--/.sidebar-->
                     </div>
                     <!--/.span3-->
+
                     <div class="span9">
                         <form class="form-horizontal row-fluid" action="current.php" method="post">
                                         <div class="control-group">
                                             <label class="control-label" for="Search"><b>Search:</b></label>
                                             <div class="controls">
-                                                <input type="text" id="title" name="title" placeholder="Enter Book Name/Book Id." class="span8" required>
+                                                <input type="text" id="title" name="title" placeholder="Enter Roll No of Student/Book Name/Book Id." class="span8" required>
                                                 <button type="submit" name="submit"class="btn">Search</button>
                                             </div>
                                         </div>
                                     </form>
                                     <br>
                                     <?php
-                                    $rollno = $_SESSION['RollNo'];
                                     if(isset($_POST['submit']))
                                         {$s=$_POST['title'];
-                                            $sql="select * from LMS.record,LMS.book where RollNo = '$rollno' and Date_of_Issue is NOT NULL and Date_of_Return is NULL and book.Bookid = record.BookId and (record.BookId='$s' or Title like '%$s%')";
-
+                                            $sql="select record.BookId,RollNo,Title,Due_Date,Date_of_Issue,datediff(curdate(),Due_Date) as x from LMS.record,LMS.book where (Date_of_Issue is NOT NULL and Date_of_Return is NULL and book.Bookid = record.BookId) and (RollNo='$s' or record.BookId='$s' or Title like '%$s%')";
                                         }
                                     else
-                                        $sql="select * from LMS.record,LMS.book where RollNo = '$rollno' and Date_of_Issue is NOT NULL and Date_of_Return is NULL and book.Bookid = record.BookId";
-
+                                        $sql="select record.BookId,RollNo,Title,Due_Date,Date_of_Issue,datediff(curdate(),Due_Date) as x from LMS.record,LMS.book where Date_of_Issue is NOT NULL and Date_of_Return is NULL and book.Bookid = record.BookId";
                                     $result=$conn->query($sql);
                                     $rowcount=mysqli_num_rows($result);
 
@@ -98,16 +99,17 @@ if ($_SESSION['RollNo']) {
                                     else
                                     {
 
-                                
+                                    
                                     ?>
                         <table class="table" id = "tables">
                                   <thead>
                                     <tr>
-                                      <th>Book id</th>
-                                      <th>Book name</th>
+                                      <th>Roll No</th>  
+                                      <th>Research Papers id</th>
+                                      <th>Research Papers name</th>
                                       <th>Issue Date</th>
                                       <th>Due date</th>
-                                      <th></th>
+                                      <th>Dues</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -115,34 +117,36 @@ if ($_SESSION['RollNo']) {
                                 <?php
 
                             
+
                             //$result=$conn->query($sql);
                             while($row=$result->fetch_assoc())
                             {
+                                $rollno=$row['RollNo'];
                                 $bookid=$row['BookId'];
                                 $name=$row['Title'];
                                 $issuedate=$row['Date_of_Issue'];
                                 $duedate=$row['Due_Date'];
-                                $renewals=$row['Renewals_left'];
+                                $dues=$row['x'];
                             
                             ?>
 
                                     <tr>
+                                      <td><?php echo strtoupper($rollno) ?></td>
                                       <td><?php echo $bookid ?></td>
                                       <td><?php echo $name ?></td>
                                       <td><?php echo $issuedate ?></td>
                                       <td><?php echo $duedate ?></td>
-                                        <td><center>
-                                        <?php 
-                                         if($renewals)
-                                            echo "<a href=\"renew_request.php?id=".$bookid."\" class=\"btn btn-success\">Renew</a>";
-                                        ?>
-                                        <a href="return_request.php?id=<?php echo $bookid; ?>" class="btn btn-primary">Return</a>
-                                        </center></td>
+                                      <td><?php if($dues > 0)
+                                                  echo "<font color='red'>".$dues."</font>";
+                                                else
+                                                  echo "<font color='green'>0</font>";
+                                              ?>
                                     </tr>
                             <?php }} ?>
                                     </tbody>
                                 </table>
                     </div>
+
                     <!--/.span9-->
                 </div>
             </div>
@@ -150,7 +154,7 @@ if ($_SESSION['RollNo']) {
         </div>
 <div class="footer">
             <div class="container">
-                <b class="copyright">&copy; 2018 Library Management System </b>All rights reserved.
+                <b class="copyright">&copy; 2022 Team Burmese Chasers </b>All rights reserved.
             </div>
         </div>
         
@@ -166,6 +170,7 @@ if ($_SESSION['RollNo']) {
     </body>
 
 </html>
+
 
 <?php }
 else {

@@ -12,7 +12,7 @@ if ($_SESSION['RollNo']) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LMS</title>
+        <title>Welcome!</title>
         <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -25,7 +25,7 @@ if ($_SESSION['RollNo']) {
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.php">LMS </a>
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.php">Welcome! </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                         <ul class="nav pull-right">
                             <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -53,14 +53,17 @@ if ($_SESSION['RollNo']) {
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home
+                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Dashboard
                                 </a></li>
                                  <li><a href="message.php"><i class="menu-icon icon-inbox"></i>Messages</a>
                                 </li>
-                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Books </a></li>
-                                <li><a href="history.php"><i class="menu-icon icon-tasks"></i>Previously Borrowed Books </a></li>
-                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Recommend Books </a></li>
-                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Books </a></li>
+                                <!-- <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
+                                </li> -->
+                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
+                                <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>
+                                <li><a href="requests.php"><i class="menu-icon icon-tasks"></i>Issue/Return Requests </a></li>
+                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Research Papers Recommendations </a></li>
+                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Research Papers </a></li>
                             </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -69,22 +72,20 @@ if ($_SESSION['RollNo']) {
                         <!--/.sidebar-->
                     </div>
                     <!--/.span3-->
-                    
                     <div class="span9">
-
                         <div class="content">
                             <div class="btn-controls">
                                 <div class="btn-box-row row-fluid">
-                                    <a href="findbook.php" class="btn-box big span4"><i class=" icon-search"></i><b>Find Book</b>
-                                    </a>
+                                    <a href="findbook.php" class="btn-box big span4"><i class=" icon-search"></i><b>Find Research Papers</b>
+                                    </a><a href="findbookissue.php" class="btn-box big span4"><i class="icon-book"></i><b>Find Research Papers Issue</b>
+                                    </a><a href="finduser.php" class="btn-box big span4"><i class="icon-user"></i><b>Find User</b>
+                                                                           </a>
                                 </div>
-                            </div>
+                                </div>
                             <!--/.module-->
                         </div>
-                        
                         <!--/.content-->
                     </div>
-                
                     <!--/.span9-->
                 </div>
             </div>
@@ -92,7 +93,7 @@ if ($_SESSION['RollNo']) {
         </div>
 <div class="footer">
             <div class="container">
-                <b class="copyright">&copy; 2018 Library Management System </b>All rights reserved.
+                <b class="copyright">&copy; 2022 Team Burmese Chasers </b>All rights reserved.
             </div>
         </div>
         
@@ -108,6 +109,7 @@ if ($_SESSION['RollNo']) {
     </body>
 
 </html>
+
 
 <?php }
 else {

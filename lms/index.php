@@ -9,7 +9,7 @@ require('dbconn.php');
 <!-- Head -->
 <head>
 
-	<title>Library Management System </title>
+	<title> RESEARCH HUB </title>
 
 	<!-- Meta-Tags -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,7 @@ require('dbconn.php');
 <!-- Body -->
 <body>
 
-	<h1>LIBRARY MANAGEMENT SYSTEM</h1>
+	<h1>RESEARCH HUB</h1>
 
 	<div class="container">
 
@@ -60,10 +60,10 @@ require('dbconn.php');
 				<input type="text" Name="RollNo" placeholder="Roll Number" required="">
 				
 				<select name="Category" id="Category">
-					<option value="GEN">General</option>
-					<option value="OBC">OBC</option>
-					<option value="SC">SC</option>
-					<option value="ST">ST</option>
+					<option value="GEN">Student</option>
+					<option value="OBC">Mentor</option>
+					<!-- <option value="SC"></option>
+					<option value="ST">ST</option> -->
 				</select>
 				<br>
 			
@@ -82,7 +82,7 @@ require('dbconn.php');
 	</div>
 
 	<div class="footer w3layouts agileits">
-		<p> &copy; 2018 Library Member Login. All Rights Reserved </a></p>
+		<p> &copy; 2022 Team Burmese Chasers </a></p>
 		
 	</div>
 

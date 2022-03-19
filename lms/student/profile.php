@@ -3,6 +3,9 @@ ob_start();
 require('dbconn.php');
 ?>
 
+<?php 
+if ($_SESSION['RollNo']) {
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +33,7 @@ require('dbconn.php');
                                 <img src="images/user.png" class="nav-avatar" />
                                 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="index.php">Your Profile</a></li>
+                                    <li><a href="profile.php">Your Profile</a></li>
                                     <!--li><a href="#">Edit Profile</a></li>
                                     <li><a href="#">Account Settings</a></li-->
                                     <li class="divider"></li>
@@ -51,14 +54,17 @@ require('dbconn.php');
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home
+                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Dashboard
                                 </a></li>
                                  <li><a href="message.php"><i class="menu-icon icon-inbox"></i>Messages</a>
                                 </li>
-                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Books </a></li>
-                                <li><a href="history.php"><i class="menu-icon icon-tasks"></i>Previously Borrowed Books </a></li>
-                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Recommend Books </a></li>
-                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Books </a></li>
+                                <!-- <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
+                                </li> -->
+                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
+                                <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>
+                                <li><a href="requests.php"><i class="menu-icon icon-tasks"></i>Issue/Return Requests </a></li>
+                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Research Papers Recommendations </a></li>
+                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Research Papers </a></li>
                             </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -67,6 +73,7 @@ require('dbconn.php');
                         <!--/.sidebar-->
                     </div>
                     <!--/.span3-->
+                    
                     <div class="span9">
                         <div class="module">
                             <div class="module-head">
@@ -82,13 +89,12 @@ require('dbconn.php');
                                 $row=$result->fetch_assoc();
 
                                 $name=$row['Name'];
-                                $category=$row['Category'];
                                 $email=$row['EmailId'];
                                 $mobno=$row['MobNo'];
                                 $pswd=$row['Password'];
                                 ?>    
-                    			
-                                <form class="form-horizontal row-fluid" action="edit_student_details.php?id=<?php echo $rollno ?>" method="post">
+                                
+                                <form class="form-horizontal row-fluid" action="edit_admin_details.php?id=<?php echo $rollno ?>" method="post">
 
                                     <div class="control-group">
                                         <label class="control-label" for="Name"><b>Name:</b></label>
@@ -96,20 +102,6 @@ require('dbconn.php');
                                             <input type="text" id="Name" name="Name" value= "<?php echo $name?>" class="span8" required>
                                         </div>
                                     </div>
-
-                                    <div class="control-group">
-                                            <label class="control-label" for="Category"><b>Category:</b></label>
-                                            <div class="controls">
-                                                <select name = "Category" tabindex="1" value="SC" data-placeholder="Select Category" class="span6">
-                                                    <option value="<?php echo $category?>"><?php echo $category ?> </option>
-                                                    <option value="GEN">GEN</option>
-                                                    <option value="OBC">OBC</option>
-                                                    <option value="SC">SC</option>
-                                                    <option value="ST">ST</option>
-                                                </select>
-                                            </div>
-                                    </div>
-
 
                                     <div class="control-group">
                                         <label class="control-label" for="EmailId"><b>Email Id:</b></label>
@@ -139,9 +131,9 @@ require('dbconn.php');
                                         </div>                                                                     
 
                                 </form>
-                    		           
+                                       
                         </div>
-                        </div> 	
+                        </div>  
                     </div>
                     
                     <!--/.span9-->
@@ -151,7 +143,7 @@ require('dbconn.php');
         </div>
 <div class="footer">
             <div class="container">
-                <b class="copyright">&copy; 2018 Library Management System </b>All rights reserved.
+                <b class="copyright">&copy; 2022 Team Burmese Chasers</b>All rights reserved.
             </div>
         </div>
         
@@ -169,12 +161,11 @@ if(isset($_POST['submit']))
 {
     $rollno = $_GET['id'];
     $name=$_POST['Name'];
-    $category=$_POST['Category'];
     $email=$_POST['EmailId'];
     $mobno=$_POST['MobNo'];
     $pswd=$_POST['Password'];
 
-$sql1="update LMS.user set Name='$name', Category='$category', EmailId='$email', MobNo='$mobno', Password='$pswd' where RollNo='$rollno'";
+$sql1="update LMS.user set Name='$name', EmailId='$email', MobNo='$mobno', Password='$pswd' where RollNo='$rollno'";
 
 
 
@@ -192,3 +183,9 @@ echo "<script type='text/javascript'>alert('Error')</script>";
     </body>
 
 </html>
+
+
+<?php }
+else {
+    echo "<script type='text/javascript'>alert('Access Denied!!!')</script>";
+} ?>

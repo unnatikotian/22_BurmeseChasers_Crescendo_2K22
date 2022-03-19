@@ -53,14 +53,17 @@ if ($_SESSION['RollNo']) {
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home
+                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Dashboard
                                 </a></li>
                                  <li><a href="message.php"><i class="menu-icon icon-inbox"></i>Messages</a>
                                 </li>
-                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Books </a></li>
-                                <li><a href="history.php"><i class="menu-icon icon-tasks"></i>Previously Borrowed Books </a></li>
-                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Recommend Books </a></li>
-                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Books </a></li>
+                                <!-- <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
+                                </li> -->
+                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
+                                <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>
+                                <li><a href="requests.php"><i class="menu-icon icon-tasks"></i>Issue/Return Requests </a></li>
+                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Research Papers Recommendations </a></li>
+                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Research Papers </a></li>
                             </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -69,48 +72,39 @@ if ($_SESSION['RollNo']) {
                         <!--/.sidebar-->
                     </div>
                     <!--/.span3-->
-                    
+
                     <div class="span9">
-                    <div class="content">
+                        <table class="table" id = "tables">
+                                  <thead>
+                                    <tr>
+                                      <th>Research Papers Name</th>
+                                      <th>Description</th>
+                                      <th>Recommended By</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <?php
+                            $sql="select * from LMS.recommendations";
+                            $result=$conn->query($sql);
+                            while($row=$result->fetch_assoc())
+                            {
+                                $bookname=$row['Book_Name'];
+                                $description=$row['Description'];
+                                $rollno=$row['RollNo'];
+                            ?>
+                                    <tr>
+                                      <td><?php echo $bookname ?></td>
+                                      <td><?php echo $description?></td>
+                                      <td><b><?php echo strtoupper($rollno)?></b></td>
 
-                        <div class="module">
-                            <div class="module-head">
-                                <h3>Reccomend a Book</h3>
-                            </div>
-                            <div class="module-body">
+                                    </tr>
+                               <?php } ?>
+                               </tbody>
+                                </table>
 
-                                    
-                                    <br >
-
-                                    <form class="form-horizontal row-fluid" action="recommendations.php" method="post">
-                                        <div class="control-group">
-                                            <label class="control-label" for="Title"><b>Book Title</b></label>
-                                            <div class="controls">
-                                                <input type="text" id="title" name="title" placeholder="Title" class="span8" required>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="control-group">
-                                            <label class="control-label" for="Description"><b>Description</b></label>
-                                            <div class="controls">
-                                                <input type="text" id="Description" name="Description" placeholder="Description" class="span8" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group">
-                                            <div class="controls">
-                                                <button type="submit" name="submit"class="btn">Submit Recommendation</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                            </div>
-                        </div>
-
-                        
-                        
-                    </div><!--/.content-->
-                </div>
-
+                                <center>
+                                <a href="addbook.php" class="btn btn-success">Add a Book</a></center>
+                    </div>
                     <!--/.span9-->
                 </div>
             </div>
@@ -118,7 +112,7 @@ if ($_SESSION['RollNo']) {
         </div>
 <div class="footer">
             <div class="container">
-                <b class="copyright">&copy; 2018 Library Management System </b>All rights reserved.
+                <b class="copyright">&copy; 2022 Team Burmese Chasers </b>All rights reserved.
             </div>
         </div>
         
@@ -130,34 +124,11 @@ if ($_SESSION['RollNo']) {
         <script src="scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
         <script src="scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="scripts/common.js" type="text/javascript"></script>
-
-<?php
-if(isset($_POST['submit']))
-{
-    $title=$_POST['title'];
-    $Description=$_POST['Description'];
-    $rollno=$_SESSION['RollNo'];
-
-$sql1="insert into LMS.recommendations (Book_Name,Description,RollNo) values ('$title','$Description','$rollno')"; 
-
-
-
-if($conn->query($sql1) === TRUE){
-
-
-echo "<script type='text/javascript'>alert('Success')</script>";
-}
-else
-{//echo $conn->error;
-echo "<script type='text/javascript'>alert('Error')</script>";
-}
-    
-}
-?> 
-
+      
     </body>
 
 </html>
+
 
 <?php }
 else {

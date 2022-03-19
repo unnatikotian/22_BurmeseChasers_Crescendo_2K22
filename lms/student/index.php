@@ -2,6 +2,9 @@
 require('dbconn.php');
 ?>
 
+<?php 
+if ($_SESSION['RollNo']) {
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +12,7 @@ require('dbconn.php');
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LMS</title>
+        <title>Welcome!</title>
         <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -22,7 +25,7 @@ require('dbconn.php');
             <div class="navbar-inner">
                 <div class="container">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.php">LMS </a>
+                        <i class="icon-reorder shaded"></i></a><a class="brand" href="index.php">Welcome! </a>
                     <div class="nav-collapse collapse navbar-inverse-collapse">
                         <ul class="nav pull-right">
                             <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -50,27 +53,36 @@ require('dbconn.php');
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home
+                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Dashboard
                                 </a></li>
                                  <li><a href="message.php"><i class="menu-icon icon-inbox"></i>Messages</a>
                                 </li>
-                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Books </a></li>
-                                <li><a href="history.php"><i class="menu-icon icon-tasks"></i>Previously Borrowed Books </a></li>
-                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Recommend Books </a></li>
-                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Books </a></li>
+                                <!-- <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
+                                </li> -->
+                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
+                                <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>
+                                <li><a href="requests.php"><i class="menu-icon icon-tasks"></i>Issue/Return Requests </a></li>
+                                <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Research Papers Recommendations </a></li>
+                                <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Research Papers </a></li>
                             </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
                             </ul>
+                            <!-- <?php
+                            include ("Chat.php");
+                            ?> -->
+                            <li><a href="Chat.php"><i class="menu-icon icon-list"></i>Collaborate Here! </a></li>
+                            <li><a href="request.html"><i class="menu-icon icon-list"></i>Requests </a></li>
                         </div>
                         <!--/.sidebar-->
                     </div>
                     <!--/.span3-->
+                    
                     <div class="span9">
-                    	<center>
-                           	<div class="card" style="width: 50%;"> 
-                    			<img class="card-img-top" src="images/profile2.png" alt="Card image cap">
-                    			<div class="card-body">
+                        <center>
+                            <div class="card" style="width: 50%;"> 
+                                <img class="card-img-top" src="images/profile2.png" alt="Card image cap">
+                                <div class="card-body">
 
                                 <?php
                                 $rollno = $_SESSION['RollNo'];
@@ -83,24 +95,20 @@ require('dbconn.php');
                                 $email=$row['EmailId'];
                                 $mobno=$row['MobNo'];
                                 ?>    
-                    				<i>
-                    				<h1 class="card-title"><center><?php echo $name ?></center></h1>
-                    				<br>
-                    				<p><b>Email ID: </b><?php echo $email ?></p>
-                    				<br>
-                    				<p><b>Roll No: </B><?php echo $rollno ?></p>
-                    				<br>
-                    				<p><b>Category: </b><?php echo $category ?></p>
-                    				<br>
-                    				<p><b>Mobile number: </b><?php echo $mobno ?></p>
-                    				</b>
+                                    <i>
+                                    <h1 class="card-title"><center><?php echo $name ?></center></h1>
+                                    <br>
+                                    <p><b>Email ID: </b><?php echo $email ?></p>
+                                    <br>
+                                    <p><b>Mobile number: </b><?php echo $mobno ?></p>
+                                    </b>
                                 </i>
 
-                    			</div>
-                    		</div>
-                            <br>
-                            <a href="edit_student_details.php" class="btn btn-primary">Edit Details</a>    
-      					</center>              	
+                                </div>
+                            </div>
+                        <br>
+                        <a href="edit_admin_details.php" class="btn btn-primary">Edit Details</a>
+                        </center>               
                     </div>
                     
                     <!--/.span9-->
@@ -110,7 +118,7 @@ require('dbconn.php');
         </div>
 <div class="footer">
             <div class="container">
-                <b class="copyright">&copy; 2018 Library Management System </b>All rights reserved.
+                <b class="copyright">&copy; 2022 Team Burmese Chasers </b>All rights reserved.
             </div>
         </div>
         
@@ -126,3 +134,9 @@ require('dbconn.php');
     </body>
 
 </html>
+
+
+<?php }
+else {
+    echo "<script type='text/javascript'>alert('Access Denied!!!')</script>";
+} ?>
