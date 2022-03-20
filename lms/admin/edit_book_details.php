@@ -60,6 +60,8 @@ if ($_SESSION['RollNo']) {
                                 </li>
                                 <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
                                 </li>
+                                <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Mentors </a>
+                                </li>
                                 <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
                                 <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>
                                 <li><a href="requests.php"><i class="menu-icon icon-tasks"></i>Issue/Return Requests </a></li>
@@ -122,7 +124,7 @@ if ($_SESSION['RollNo']) {
 
                                         <div class="control-group">
                                             <b>
-                                            <label class="control-label" for="Availability">Availability:</label></b>
+                                            <label class="control-label" for="Availability">Availability of Mentors:</label></b>
                                             <div class="controls">
                                                 <input type="text" id="Availability" name="Availability" value= "<?php echo $avail?>" class="span8" required>
                                             </div>

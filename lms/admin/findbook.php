@@ -12,7 +12,7 @@ if ($_SESSION['RollNo']) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome!</title>
+        <title>Welcome</title>
         <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -58,6 +58,8 @@ if ($_SESSION['RollNo']) {
                                  <li><a href="message.php"><i class="menu-icon icon-inbox"></i>Messages</a>
                                 </li>
                                 <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
+                                </li>
+                                <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Mentors </a>
                                 </li>
                                 <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
                                 <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>

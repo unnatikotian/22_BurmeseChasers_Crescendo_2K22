@@ -60,6 +60,8 @@ if ($_SESSION['RollNo']) {
                                 </li>
                                 <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Students </a>
                                 </li>
+                                <li><a href="student.php"><i class="menu-icon icon-user"></i>Manage Mentors </a>
+                                </li>
                                 <li><a href="book.php"><i class="menu-icon icon-book"></i>All Research Papers </a></li>
                                 <li><a href="addbook.php"><i class="menu-icon icon-edit"></i>Add Research Papers </a></li>
                                 <li><a href="requests.php"><i class="menu-icon icon-tasks"></i>Issue/Return Requests </a></li>

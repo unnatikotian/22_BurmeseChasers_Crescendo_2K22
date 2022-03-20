@@ -86,7 +86,7 @@ if ($_SESSION['RollNo']) {
 
                                     <form class="form-horizontal row-fluid" action="message.php" method="post">
                                         <div class="control-group">
-                                            <label class="control-label" for="Rollno"><b>Receiver Roll No:</b></label>
+                                            <label class="control-label" for="Rollno"><b>Type Students Roll No:</b></label>
                                             <div class="controls">
                                                 <input type="text" id="RollNo" name="RollNo" placeholder="RollNo" class="span8" required>
                                             </div>

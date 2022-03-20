@@ -59,7 +59,11 @@ require('dbconn.php');
                                 <li><a href="history.php"><i class="menu-icon icon-tasks"></i>Previously Borrowed Research Papers </a></li>
                                 <li><a href="recommendations.php"><i class="menu-icon icon-list"></i>Recommend Research Papers</a></li>
                                 <li><a href="current.php"><i class="menu-icon icon-list"></i>Currently Issued Research Papers</a></li>
-                            </ul>
+
+                                <li><a href="http://localhost/phpchat/user.php"><i class="menu-icon icon-list"></i> Communication Interface </a></li>
+                                <li><a href="http://localhost/friend-request-system/index.php"><i class="menu-icon icon-list"></i>Requests </a></li>
+                                <li><a href="http://localhost/chatbot/bot.php"><i class="chatbot-icon icon-list"></i> Chatbot </a></li>
+                                <li><a href="http://127.0.0.1:5500/File%20Upload%20in%20JavaScript/index.html"><i class="upload-icon icon-list"></i> Upload </a></li>                            </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
                             </ul>
